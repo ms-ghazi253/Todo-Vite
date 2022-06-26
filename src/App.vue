@@ -41,7 +41,7 @@ export default{
 				Action: ['Delete' , 'Edit'],
 				key: Date.now() , 
 				done: false,
-				editMode: false
+				editMode: false,
 			});
 
 		}, 
