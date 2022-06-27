@@ -35,19 +35,18 @@
 </template>
 <script>
 export default{
-	props:{
-		items:{
-			type:Array,
-			key:Number,
-			required:true,
-			validator:function(value){
-				return value.length>1
-			} , 
-
-		test: String
-			
-		}
-	} , 
+	//props:{
+	//	items:{
+	//		type:Array,
+	//		key:Number,
+	//		required:true,
+	//		validator:function(value){
+	//			return value.length>1
+	//		} , 
+	//	test: String
+	//	},
+	//},
+	inject:['itmes'] , 
 	emits:[ 'deleteTask' ,'edit-todo'],
 	data(){
 		return{

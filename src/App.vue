@@ -33,6 +33,17 @@ export default{
 			tasks:[]
 		}
 	},
+	provide:{
+		tasks:[
+		//	{
+		//	id:1,
+		//	TodoItem:'go to gym',
+		//	key: Date.now(),
+		//	Action:['Delete' , 'Edit'],
+		//	done:false
+		//}
+		]
+	},
 	methods:{
 		dataHandler(text, status) {
 				this.tasks.push({
