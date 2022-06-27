@@ -44,7 +44,7 @@ export default{
 				return value.length>1
 			} , 
 
-		test: String
+		//test: String
 			
 		}
 	} , 
