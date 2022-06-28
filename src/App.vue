@@ -33,16 +33,16 @@ export default{
 			tasks:[]
 		}
 	},
-	provide:{
-		tasks:[
-		//	{
-		//	id:1,
-		//	TodoItem:'go to gym',
-		//	key: Date.now(),
-		//	Action:['Delete' , 'Edit'],
-		//	done:false
-		//}
-		]
+	provide(){
+		//وقتی بخواهیم از یک پروواید استاتیک استفاده بکنیم آن را به حالت ابجت استفاده میکنیم اما اگر بخواهیم داینامیک باشه انرا مثل متد استفاده میکنیم 
+		return{
+			tasks:[{
+				TodoItem: 'go to gym ',
+				Action: ['Delete' , 'Edit'],
+				key: Date.now() , 
+				done: false,
+			}]
+		}
 	},
 	methods:{
 		dataHandler(text, status) {
