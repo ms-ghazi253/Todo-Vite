@@ -45,7 +45,7 @@ export default{
 	//		} , 
 	//	test: String
 	//	},
-	//},
+	//},  
 	inject:['itmes'] , 
 	emits:[ 'deleteTask' ,'edit-todo'],
 	data(){
