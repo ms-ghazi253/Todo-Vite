@@ -19,6 +19,7 @@
 <script >
 import Formtodo from './components/Form-todo.vue'
 import Tabletodo from './components/Table-todo.vue'
+import axios from 'axios';
 export default{
 	components:{
 		Formtodo,
@@ -36,14 +37,29 @@ export default{
 	
 	methods:{
 		dataHandler(text, status) {
-				this.tasks.push({
-				TodoItem: text,
-				Status: status,
-				Action: ['Delete' , 'Edit'],
-				key: Date.now() , 
-				done: false,
-				editMode: false,
-			});
+			let todo={
+				done:false, 
+				Status:status,
+				TodoItem:text,
+				Action:['Delete','Edit']
+			}
+			axios.post('https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks.json' , todo)
+				.then(res=>{
+					this.tasks.push({
+						...todo,
+						key: res.data.name,
+						editMode: false,
+					})
+				})
+				.catch(err=>console.log(err));
+			//	this.tasks.push({
+			//	TodoItem: text,
+			//	Status: status,
+			//	Action: ['Delete' , 'Edit'],
+			//	key: Date.now() , 
+			//	done: false,
+			//	editMode: false,
+			//});
 
 		}, 
 		deleteTask(key){
