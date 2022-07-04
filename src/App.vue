@@ -34,7 +34,19 @@ export default{
 			tasks:[]
 		}
 	},
-	
+	created(){
+		axios.get('https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks.json')
+			.then(({data}) =>{
+			let tasks=Object.entries(data).map(val=>{
+				return{
+					key: val[0],
+					... val[1]
+				};
+				})
+				this.tasks = tasks
+			})
+			.catch(err=>console.log(err))
+		},
 	methods:{
 		dataHandler(text, status) {
 			let todo={
@@ -52,20 +64,13 @@ export default{
 					})
 				})
 				.catch(err=>console.log(err));
-			//	this.tasks.push({
-			//	TodoItem: text,
-			//	Status: status,
-			//	Action: ['Delete' , 'Edit'],
-			//	key: Date.now() , 
-			//	done: false,
-			//	editMode: false,
-			//});
-
+ 
 		}, 
 		deleteTask(key){
 			this.tasks = this.tasks.filter(item=>item.key!=key)
 		},
 		editTodo({key ,text, editMode}){
+			
 			this.tasks = this.tasks.map(item=>{
 				if(item.key==key){
 					return{
