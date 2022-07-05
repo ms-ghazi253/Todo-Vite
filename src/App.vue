@@ -67,7 +67,12 @@ export default{
  
 		}, 
 		deleteTask(key){
-			this.tasks = this.tasks.filter(item=>item.key!=key)
+			console.log(key);
+			axios.delete(`https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks/${key}.json`)
+					.then(res=>{
+						this.tasks = this.tasks.filter(item=>item.key!=key)
+						console.log(res)
+						}).catch(err => console.log(err))
 		},
 		editTodo({key ,text, editMode}){
 			
