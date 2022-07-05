@@ -23,7 +23,7 @@
 <script >
 import Formtodo from "./components/Form-todo.vue";
 import Tabletodo from "./components/Table-todo.vue";
-import axios from "axios";
+import TasksApi from './Api/TasksApi'
 export default {
   components: {
     Formtodo,
@@ -39,9 +39,9 @@ export default {
     };
   },
   created() {
-    axios
+    TasksApi
       .get(
-        "https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
+        "/tasks.json"
       )
       .then(({ data }) => {
         let tasks = Object.entries(data).map((val) => {
@@ -62,9 +62,9 @@ export default {
         TodoItem: text,
         Action: ["Delete", "Edit"],
       };
-      axios
+      TasksApi
         .post(
-          "https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+          "/tasks.json",
           todo
         )
         .then((res) => {
@@ -78,9 +78,9 @@ export default {
     },
     deleteTask(key) {
       console.log(key);
-      axios
+      TasksApi
         .delete(
-          `https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks/${key}.json`
+          `/tasks/${key}.json`
         )
         .then((res) => {
           this.tasks = this.tasks.filter((item) => item.key != key);
@@ -89,9 +89,9 @@ export default {
         .catch((err) => console.log(err));
     },
     editTodo({ key, text, editMode }) {
-      axios
+      TasksApi
         .patch(
-          `https://vue-course-7f9dd-default-rtdb.europe-west1.firebasedatabase.app/tasks/${key}.json`,
+          `/tasks/${key}.json`,
           { text }
         )
         .then((res) => {
