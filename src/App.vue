@@ -7,11 +7,13 @@
             <div class="card-body p-4">
               <h4 class="text-center my-3 pb-3">To Do App</h4>
               <Formtodo @add-todo="dataHandler" :Position="Statuses"></Formtodo>
-              <Tabletodo
+              <div class="conta"><Tabletodo
                 @delete-task="deleteTask"
                 :items="tasks"
                 @edit-todo="editTodo($event)"
-              ></Tabletodo>
+              	v-if="! loading"></Tabletodo>
+				<div v-else>Loading...</div>
+				</div>
             </div>
           </div>
         </div>
@@ -36,14 +38,16 @@ export default {
       StatusEmpty: "",
       Statuses: ["stopped", "inprogress", "finished"],
       tasks: [],
+	  loading:false
     };
   },
   created() {
-    TasksApi
-      .get(
+	this.loading=true;
+    TasksApi.get(
         "/tasks.json"
       )
       .then(({ data }) => {
+		this.loading=false;
         let tasks = Object.entries(data).map((val) => {
           return {
             key: val[0],
